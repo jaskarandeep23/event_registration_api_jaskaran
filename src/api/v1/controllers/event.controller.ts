@@ -50,3 +50,36 @@ export const getEventById = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateEvent = async (req: Request, res: Response) => {
+  try {
+    const updated = await eventService.updateEvent(req.params.id, req.body);
+
+    if (!updated) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    return res.status(200).json({
+      message: "Event updated successfully",
+      data: updated,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to update event" });
+  }
+};
+
+export const deleteEvent = async (req: Request, res: Response) => {
+  try {
+    const deleted = await eventService.deleteEvent(req.params.id);
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    return res.status(200).json({
+      message: "Event deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to delete event" });
+  }
+};

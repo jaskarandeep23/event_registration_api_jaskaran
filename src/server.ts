@@ -1,7 +1,14 @@
-import app from "./app";
+import express from "express";
+import eventRoutes from "./api/v1/routes/event.routes";
 
-const PORT = 3000;
+const app = express();
+app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.use("/api/v1", eventRoutes);
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });
+import healthRoutes from "./api/v1/routes/health.routes";
+app.use("/api/v1", healthRoutes);
+
