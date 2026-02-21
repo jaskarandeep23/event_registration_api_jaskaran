@@ -11,7 +11,7 @@ export const createEvent = async (event: Event): Promise<Event> => {
 export const getAllEvents = async (): Promise<Event[]> => {
   const snapshot = await collection.get();
 
-  return snapshot.docs.map((doc) => {
+  return snapshot.docs.map((doc: FirebaseFirestore.QueryDocumentSnapshot) => {
     const data = doc.data() as Event;
 
     return {
