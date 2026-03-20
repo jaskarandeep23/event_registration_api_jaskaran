@@ -2,6 +2,7 @@ import express from "express";
 import eventRoutes from "./api/v1/routes/event.routes";
 import healthRoutes from "./api/v1/routes/health.routes";
 import helmet from "helmet";
+import cors from "cors";
 
 const app = express();
 app.use(
@@ -16,6 +17,16 @@ app.use(
     referrerPolicy: { policy: "no-referrer" },
   })
 );
+const corsOptions = {
+  origin: ["http://localhost:3000", "http://localhost:5173"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
