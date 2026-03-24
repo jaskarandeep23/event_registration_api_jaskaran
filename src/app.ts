@@ -3,6 +3,7 @@ import eventRoutes from "./api/v1/routes/event.routes";
 import healthRoutes from "./api/v1/routes/health.routes";
 import helmet from "helmet";
 import cors from "cors";
+import setupSwagger from "./config/swagger";
 
 const app = express();
 app.use(
@@ -36,5 +37,7 @@ app.use("/api/v1", healthRoutes);
 app.get("/", (_req, res) => {
   res.send("API is running");
 });
+
+setupSwagger(app);
 
 export default app;
