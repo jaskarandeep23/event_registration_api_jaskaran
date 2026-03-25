@@ -1,16 +1,21 @@
 import admin from "firebase-admin";
-import path from "path";
-import fs from "fs";
+import dotenv from "dotenv";
 
-const serviceAccountPath = path.join(__dirname, "../../../serviceAccountKey.json");
-const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
+dotenv.config();
+
+const serviceAccount = {
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+};
 
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
   });
 }
-const db = admin.firestore(); 
-export { db };
 
+const db = admin.firestore();
+
+export { db };
 export default admin;

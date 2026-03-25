@@ -1,5 +1,86 @@
 import Joi from "joi";
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     CreateEvent:
+ *       type: object
+ *       required:
+ *         - name
+ *         - date
+ *         - location
+ *         - capacity
+ *       properties:
+ *         name:
+ *           type: string
+ *           minLength: 3
+ *           description: Name of the event
+ *           example: Tech Conference
+ *         date:
+ *           type: string
+ *           format: date
+ *           description: Date of the event
+ *           example: 2026-04-15
+ *         location:
+ *           type: string
+ *           description: Location of the event
+ *           example: Winnipeg
+ *         capacity:
+ *           type: integer
+ *           minimum: 1
+ *           description: Maximum number of attendees
+ *           example: 100
+ */
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     UpdateEvent:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           minLength: 3
+ *           description: Updated name of the event
+ *           example: Updated Tech Conference
+ *         date:
+ *           type: string
+ *           format: date
+ *           description: Updated date of the event
+ *           example: 2026-04-20
+ *         location:
+ *           type: string
+ *           description: Updated location of the event
+ *           example: Toronto
+ *         capacity:
+ *           type: integer
+ *           minimum: 1
+ *           description: Updated maximum number of attendees
+ *           example: 150
+ */
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Error:
+ *       type: object
+ *       required:
+ *         - error
+ *         - message
+ *       properties:
+ *         error:
+ *           type: string
+ *           description: Error type or code
+ *           example: VALIDATION_ERROR
+ *         message:
+ *           type: string
+ *           description: Human-readable error message
+ *           example: Name is required
+ */
+
 export const createEventSchema = Joi.object({
   name: Joi.string()
     .trim()
